@@ -25,10 +25,6 @@ const struct VBDeploymentInfo VersionBitsDeploymentInfo[Consensus::MAX_VERSION_B
     {
         "check_dup_txin",
         true,
-    },
-    {
-        "taproot",
-        true,
     }
 };
 
