@@ -22,7 +22,6 @@ enum DeploymentPos
     // NOTE: Also add new deployments to VersionBitsDeploymentInfo in versionbits.cpp
 
     DEPLOYMENT_CHECK_DUP_TXIN,
-    DEPLOYMENT_TAPROOT,
     MAX_VERSION_BITS_DEPLOYMENTS
 };
 

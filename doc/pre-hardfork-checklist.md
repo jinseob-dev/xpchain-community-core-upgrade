@@ -279,16 +279,11 @@ SSE2 경로보다 **정밀도가 높아** 절단 결과가 달라진다.
 
 ### B-4. 죽은 활성화 파라미터가 RPC에서 거짓을 보고한다
 
-`DEPLOYMENT_TAPROOT`는 enum에 선언되고(`consensus/params.h:25`) 세 네트워크 모두에
-설정되어 있으며 메인넷·테스트넷에서 `ALWAYS_ACTIVE`이지만, **어디서도 읽히지 않는다.**
-실제 게이트는 `TaprootHeight`다.
+> **상태: 완료.** `consensus/params.h`, `versionbits.cpp`, `chainparams.cpp`에서 더미 `DEPLOYMENT_TAPROOT`를
+> 완전히 제거했다. Taproot 활성화 기준은 `TaprootHeight` 단일 출처로 유지되며, `getblockchaininfo`의 거짓 보고가 해결되었다.
 
-그 결과 `getblockchaininfo`는 체인 첫 3,000,000블록 동안 "taproot 활성"이라고
-보고하면서 실제로는 시행하지 않았다. 지금은 높이가 지나 우연히 일치한다.
-
-**할 일** `DEPLOYMENT_TAPROOT`를 제거하고 `TaprootHeight`를 단일 출처로 남긴다.
-하드포크 활성화에 versionbits를 쓸지 높이를 쓸지 결정할 때(§C-1) 이 정리가 선행돼야
-한다.
+`DEPLOYMENT_TAPROOT`는 enum에 선언되고 세 네트워크 모두에 설정되어 `ALWAYS_ACTIVE`였으나 어디서도 읽히지 않고
+실제 게이트는 `TaprootHeight`였다. 이로 인해 RPC에서 거짓 보고가 발생하던 문제를 파라미터 제거를 통해 해소했다.
 
 ### B-5. `BLOCK_SIGNATURE_ADDITION`의 실제 활성 상태를 확인해야 한다
 
